@@ -4,19 +4,21 @@ public class UsuarioTokenDto
 {
     #region Propriedades
 
+    public Guid UsuarioId { get; set; }
     public string Nome { get; set; }
     public string Email { get; set; }
-    public string Token { get; set; }
+    public string AccessToken { get; set; }
 
     #endregion
 
     #region Construtor
 
-    public UsuarioTokenDto(string nome, string email, string token)
+    public UsuarioTokenDto(Guid usuarioId, string nome, string email, string token)
     {
+        UsuarioId = usuarioId;
         Nome = nome;
         Email = email;
-        Token = token;
+        AccessToken = token;
     }
 
     protected UsuarioTokenDto() { }

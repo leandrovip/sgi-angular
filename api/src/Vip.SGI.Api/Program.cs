@@ -15,6 +15,7 @@ builder.Configuration
 // TODO: Adicionar LazyCache
 
 builder.Services.AddCors();
+
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddServiceInjection();
 builder.Services.AddJwtAuth();
@@ -29,7 +30,12 @@ builder.Services.AddEndpointsApiExplorer();
 #region ApplicationBuilder
 
 var app = builder.Build();
-app.UseCors();
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin
+    .AllowCredentials());               // allow credentials);
+
 app.UseDevelopment(app.Environment);
 app.UseHttpsRedirection();
 app.UseMiddleware<ErrorHandlerMiddleware>();

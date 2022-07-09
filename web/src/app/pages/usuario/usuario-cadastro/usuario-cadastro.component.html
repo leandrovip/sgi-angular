@@ -1,0 +1,60 @@
+<div class="pagetitle">
+  <h1>Usuário</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="">Home</a></li>
+      <li class="breadcrumb-item"><a href="/usuarios">Usuário</a></li>
+      <li class="breadcrumb-item active">Incluir</li>
+    </ol>
+  </nav>
+</div>
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+          <form class="row g-3">
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="nome">
+                <label for="email">Nome</label>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-floating">
+                <input type="email" class="form-control" id="email">
+                <label for="email">E-mail</label>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-floating">
+                <select class="form-select" id="usuarioFuncao" aria-label="Função">
+                  <option value="0">Colaborador</option>
+                  <option value="1">Administrador</option>
+                </select>
+                <label for="usuarioFuncao">Função</label>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input type="password" class="form-control" name="senha" id="senha">
+                <label for="senha">Senha</label>
+              </div>
+            </div>
+
+            <div class="text-end">
+              <button type="submit" class="btn btn-success">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>

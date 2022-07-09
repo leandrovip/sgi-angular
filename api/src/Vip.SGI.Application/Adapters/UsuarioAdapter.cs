@@ -19,9 +19,14 @@ public static class UsuarioAdapter
         return new UsuarioDto(usuario.UsuarioId, usuario.Nome, usuario.Email.Endereco, "", usuario.UsuarioFuncao.GetDescription());
     }
 
+    public static IEnumerable<UsuarioDto> ToDto(this IEnumerable<Usuario> usuarios)
+    {
+        return usuarios.Select(x => x.ToDto()).ToList();
+    }
+
     public static UsuarioTokenDto ToToken(this Usuario usuario)
     {
         var token = JwtBuilder.Create(usuario);
-        return new UsuarioTokenDto(usuario.Nome, usuario.Email.Endereco, token);
+        return new UsuarioTokenDto(usuario.UsuarioId, usuario.Nome, usuario.Email.Endereco, token);
     }
 }

@@ -56,6 +56,11 @@ public class UsuarioService : BaseService
         }
     }
 
+    public async Task<IEnumerable<Usuario>> Obter()
+    {
+        return await _db.Usuario.AsNoTracking().OrderBy(x => x.Nome).ToListAsync();
+    }
+
     #endregion
 
     #region Métodos Privados

@@ -29,6 +29,13 @@ public class UsuarioController : BaseController
 
     #region Métodos Públicos
 
+    [HttpGet]
+    public async Task<IActionResult> ObterLista()
+    {
+        var usuarios = await _service.Obter();
+        return ActionResult(_service, usuarios.ToDto());
+    }
+
     [HttpPost]
     public async Task<IActionResult> Incluir(UsuarioDto dto)
     {
@@ -55,9 +62,9 @@ public class UsuarioController : BaseController
     }
 
     [HttpPost]
-    [Route("~/token")]
+    [Route("autenticar")]
     [AllowAnonymous]
-    public async Task<IActionResult> ObterToken(UsuarioLoginDto tokenRequest)
+    public async Task<IActionResult> Autenticar(UsuarioLoginDto tokenRequest)
     {
         if (tokenRequest.IsNull()) return BadResult("E-mail ou senha inválidos");
         var usuario = await _service.Obter(tokenRequest.Email, tokenRequest.Senha);

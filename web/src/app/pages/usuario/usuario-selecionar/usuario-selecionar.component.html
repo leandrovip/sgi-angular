@@ -1,0 +1,7 @@
+<a name="usuarioIncluir" id="btnUsuarioIncluir" class="btn btn-primary" href="/usuarios/incluir" role="button">Incluir</a>
+
+<div *ngFor="let item of (usuarios | async)?.data">
+  <p>{{item.nome}}</p>
+  <p>{{item.email}}</p>
+  <p>{{item.usuarioFuncao}}</p>
+</div>
