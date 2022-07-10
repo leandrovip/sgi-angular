@@ -68,7 +68,7 @@ public class UsuarioController : BaseController
     {
         if (tokenRequest.IsNull()) return BadResult("E-mail ou senha inválidos");
         var usuario = await _service.Obter(tokenRequest.Email, tokenRequest.Senha);
-        return usuario.IsNull() ? BadResult("E-mail ou senha inválidos") : ActionResult(_service, usuario.ToToken());
+        return usuario.IsNull() ? BadResult("E-mail ou senha inválidos") : ActionResult(_service, usuario.ToAccessToken());
     }
 
     #endregion

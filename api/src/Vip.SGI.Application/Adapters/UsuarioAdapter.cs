@@ -24,9 +24,9 @@ public static class UsuarioAdapter
         return usuarios.Select(x => x.ToDto()).ToList();
     }
 
-    public static UsuarioTokenDto ToToken(this Usuario usuario)
+    public static UsuarioTokenDto ToAccessToken(this Usuario usuario)
     {
         var token = JwtBuilder.Create(usuario);
-        return new UsuarioTokenDto(usuario.UsuarioId, usuario.Nome, usuario.Email.Endereco, token);
+        return new UsuarioTokenDto(usuario.UsuarioId, usuario.Nome, usuario.Email.Endereco, usuario.UsuarioFuncao.GetDescription(), token);
     }
 }

@@ -5,30 +5,31 @@ import { UsuarioLoginComponent } from './pages/usuario/usuario-login/usuario-log
 import { MainComponent } from './components/layout/main/main.component';
 import { UsuarioCadastroComponent } from './pages/usuario/usuario-cadastro/usuario-cadastro.component';
 import { UsuarioSelecionarComponent } from './pages/usuario/usuario-selecionar/usuario-selecionar.component';
-import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-    {
-        path: '',
-        canActivate: [AuthService],
-        component: MainComponent,
-        children: [{ path: '', component: DashboardComponent }],
-    },
-    {
-        path: 'usuarios',
-        canActivate: [AuthService],
-        component: MainComponent,
-        children: [
-            { path: '', component: UsuarioSelecionarComponent },
-            { path: 'incluir', component: UsuarioCadastroComponent },
-        ],
-    },
-    { path: 'login', component: UsuarioLoginComponent },
-    { path: '**', component: UsuarioLoginComponent },
+	{ path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+	{
+		path: 'dashboard',
+		component: MainComponent,
+		canActivate: [AuthGuard],
+		children: [{ path: '', component: DashboardComponent }],
+	},
+	{
+		path: 'usuarios',
+		canActivate: [AuthGuard],
+		component: MainComponent,
+		children: [
+			{ path: '', component: UsuarioSelecionarComponent },
+			{ path: 'incluir', component: UsuarioCadastroComponent },
+		],
+	},
+	{ path: 'login', component: UsuarioLoginComponent },
+	{ path: '**', component: UsuarioLoginComponent }, // criar 404
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule],
 })
 export class AppRoutingModule {}
