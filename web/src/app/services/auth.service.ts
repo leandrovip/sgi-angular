@@ -24,7 +24,11 @@ export class AuthService {
 
 	public static getRole(): UsuarioFuncao {
 		const funcao = this.getUser()?.usuarioFuncao;
-		let funcaoEnum = funcao as keyof typeof UsuarioFuncao;
+		return this.roleStringToEnum(funcao ?? UsuarioFuncao.Colaborador);
+	}
+
+	public static roleStringToEnum(role: string): UsuarioFuncao {
+		let funcaoEnum = role as keyof typeof UsuarioFuncao;
 		return UsuarioFuncao[funcaoEnum];
 	}
 

@@ -6,6 +6,7 @@ import { MainComponent } from './components/layout/main/main.component';
 import { UsuarioCadastroComponent } from './pages/usuario/usuario-cadastro/usuario-cadastro.component';
 import { UsuarioSelecionarComponent } from './pages/usuario/usuario-selecionar/usuario-selecionar.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UsuarioFuncao } from './enums/usuarioFuncao.enum';
 
 const routes: Routes = [
 	{ path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -19,6 +20,7 @@ const routes: Routes = [
 		path: 'usuarios',
 		canActivate: [AuthGuard],
 		component: MainComponent,
+		data: { role: [UsuarioFuncao.Administrador] },
 		children: [
 			{ path: '', component: UsuarioSelecionarComponent },
 			{ path: 'incluir', component: UsuarioCadastroComponent },
