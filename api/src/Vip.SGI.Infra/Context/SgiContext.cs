@@ -35,7 +35,7 @@ public class SgiContext : DbContext
         var retorno = Usuario.AsNoTracking().Any();
         if (!retorno)
         {
-            var usuario = new Usuario(Guid.NewGuid(), "Admin", "admin@admin.com", "123", UsuarioFuncao.Administrador);
+            var usuario = new Usuario(Guid.NewGuid(), "Admin", "admin@admin.com", "NlgZxuUnCWc=", UsuarioFuncao.Administrador);
             Usuario.Add(usuario);
             SaveChanges();
         }
