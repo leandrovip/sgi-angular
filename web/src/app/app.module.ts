@@ -9,11 +9,11 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './components/layout/layout.module';
 import { SharedModule } from './components/shared/shared.module';
 import { JwtInterceptor } from './middlewares/jwt-interceptor';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsuarioModule } from './pages/usuario/usuario.module';
+import { DashboardModule } from './pages/dashboard/dashboard.module';
 
 @NgModule({
-	declarations: [AppComponent, DashboardComponent],
+	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		HttpClientModule,
@@ -22,6 +22,7 @@ import { UsuarioModule } from './pages/usuario/usuario.module';
 		LayoutModule,
 		SharedModule,
 		UsuarioModule,
+		DashboardModule,
 		AppRoutingModule,
 	],
 	providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
