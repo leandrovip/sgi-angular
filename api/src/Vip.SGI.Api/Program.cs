@@ -11,9 +11,8 @@ builder.Configuration
 #region Services
 
 // TODO: Adicionar SignalR posteriormente para comunicação
-// TODO: Adicionar classe shared de email e datetime service
+// TODO: Adicionar classe shared de email
 // TODO: Adicionar LazyCache
-//builder.Services.AddCors();
 
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddServiceInjection();
@@ -29,6 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 #region ApplicationBuilder
 
 var app = builder.Build();
+
 app.UseCors(x => x
     .WithOrigins("http://localhost:4200")
     .AllowAnyMethod()

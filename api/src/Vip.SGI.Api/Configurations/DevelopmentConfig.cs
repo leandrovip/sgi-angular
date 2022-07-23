@@ -1,4 +1,6 @@
-﻿namespace Vip.SGI.Api.Configurations;
+﻿using Vip.SGI.Infra.Context;
+
+namespace Vip.SGI.Api.Configurations;
 
 public static class DevelopmentConfig
 {
@@ -11,6 +13,14 @@ public static class DevelopmentConfig
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(o => { o.DocumentTitle = "Swagger VIP - Sistema de Gerenciamento Interno"; });
+
+            #region Seed Migrations
+
+            using var scope = app.ApplicationServices.CreateScope();
+            var context = scope.ServiceProvider.GetService<SgiContext>();
+            context?.Seed();
+
+            #endregion
         }
     }
 
