@@ -8,6 +8,7 @@ public interface ICurrentUser
     Guid GetUserId();
     string GetUserEmail();
     bool IsAutenticated();
+    bool IsNotAutenticated();
     bool IsInRole(string role);
     IEnumerable<Claim> GetUserClaims();
     HttpContext GetHttpContext();

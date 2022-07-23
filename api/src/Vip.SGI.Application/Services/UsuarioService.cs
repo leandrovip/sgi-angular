@@ -23,7 +23,8 @@ public class UsuarioService : BaseService
     public async Task<bool> Salvar(Usuario usuario, bool novoCadastro)
     {
         if (InvalidModel(usuario)) return false;
-        if (novoCadastro && await SeCadastrado(usuario)) return false;
+        if (await SeCadastrado(usuario)) return false;
+        if (!novoCadastro) await CarregarUsuario(usuario);
 
         usuario.Criptografar();
         return await Salvar<Usuario>(usuario, novoCadastro);
@@ -32,6 +33,26 @@ public class UsuarioService : BaseService
     public async Task Excluir(Guid usuarioId)
     {
         await Excluir<Usuario>(usuarioId);
+    }
+
+    public async Task<Usuario> Obter(Guid usuarioId)
+    {
+        if (usuarioId.IsEmpty())
+        {
+            AddNotification("UsuarioService.Obter", "Usuário não encontrado");
+            return null;
+        }
+
+        try
+        {
+            return await _db.Usuario.FindAsync(usuarioId);
+        }
+        catch (Exception ex)
+        {
+            AddNotification("UsuarioService.Obter", "Não foi possível obter o usuário desejado");
+            AddNotification("Erro", $"Mensagem: {ex.Message}");
+            return null;
+        }
     }
 
     public async Task<Usuario> Obter(string email, string senha)
@@ -64,6 +85,12 @@ public class UsuarioService : BaseService
     #endregion
 
     #region Métodos Privados
+
+    private async Task CarregarUsuario(Usuario usuario)
+    {
+        var cadastro = await _db.Usuario.AsNoTracking().FirstOrDefaultAsync(x => x.UsuarioId.Equals(usuario.UsuarioId));
+        usuario.PrepararEdicao(cadastro!);
+    }
 
     private async Task<bool> SeCadastrado(Usuario usuario)
     {

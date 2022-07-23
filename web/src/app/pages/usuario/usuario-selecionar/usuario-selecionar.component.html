@@ -1,7 +1,58 @@
-<a name="usuarioIncluir" id="btnUsuarioIncluir" class="btn btn-primary" href="/usuarios/incluir" role="button">Incluir</a>
+<app-pagetitle title="Usuários" page="Usuários"></app-pagetitle>
+
+<!-- <a name="usuarioIncluir" id="btnUsuarioIncluir" class="btn btn-primary" href="/usuarios/incluir" role="button">
+	Incluir
+</a> -->
+
+<div class="card">
+	<div class="card-body">
+		<div class="card-title">
+			<div class="row mb-3">
+				<div class="text-start">
+					<a name="usuarioIncluir" class="btn btn-secondary bi-plus" [routerLink]="['incluir']"> Novo Usuário </a>
+				</div>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nome</th>
+					<th scope="col">E-mail</th>
+					<th scope="col">Função</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of (usuarios | async)?.data; let i = index">
+					<th scope="row">{{ i + 1 }}</th>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.email }}</td>
+					<td>
+						<span class="badge" [ngClass]="item.usuarioFuncao === 'Colaborador' ? 'bg-warning' : 'bg-success'">{{
+							item.usuarioFuncao
+						}}</span>
+					</td>
+					<td>
+						<div class="btn-group btn-group-sm">
+							<button class="btn btn-outline-warning" [routerLink]="['editar', item.usuarioId]">
+								<i class="bi-pencil"></i>
+							</button>
+							<button class="btn btn-outline-danger" [routerLink]="['excluir', item.usuarioId]">
+								<i class="bi-trash"></i>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- <table></table>
 
 <div *ngFor="let item of (usuarios | async)?.data">
-  <p>{{item.nome}}</p>
-  <p>{{item.email}}</p>
-  <p>{{item.usuarioFuncao}}</p>
-</div>
+	<p>{{ item.nome }}</p>
+	<p>{{ item.email }}</p>
+	<p>{{ item.usuarioFuncao }}</p>
+</div> -->

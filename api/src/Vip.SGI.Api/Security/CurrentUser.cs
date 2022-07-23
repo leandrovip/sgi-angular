@@ -28,6 +28,7 @@ public class CurrentUser : ICurrentUser
     public string GetUserEmail() => IsAutenticated() ? _accessor.HttpContext?.User.GetUserEmail() : "";
 
     public bool IsAutenticated() => _accessor.HttpContext!.User.Identity!.IsAuthenticated;
+    public bool IsNotAutenticated() => !IsAutenticated();
 
     public bool IsInRole(string role) => _accessor.HttpContext!.User.IsInRole(role);
 

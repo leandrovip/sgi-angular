@@ -1,25 +1,15 @@
-<div class="pagetitle">
-  <h1>Dashboard</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
-  </nav>
-</div><!-- End Page Title -->
+<app-pagetitle title="Dashboard" page="Dashboard"></app-pagetitle>
+<!-- End Page Title -->
 
 <section class="section dashboard">
-  <div class="row">
-
-    <!-- Left side columns -->
-    <div class="col-lg-12">
-      <div class="row">
-
-        <!-- Vendas Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
-
-            <!-- <div class="filter">
+	<div class="row">
+		<!-- Left side columns -->
+		<div class="col-lg-12">
+			<div class="row">
+				<!-- Vendas Card -->
+				<div class="col-xxl-4 col-md-6">
+					<div class="card info-card sales-card">
+						<!-- <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <li class="dropdown-header text-start">
@@ -32,88 +22,87 @@
               </ul>
             </div> -->
 
-            <div class="card-body">
-              <h5 class="card-title">Vendas</h5>
+						<div class="card-body">
+							<h5 class="card-title">Vendas</h5>
 
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
-                </div>
-                <div class="ps-3">
-                  <h5 class="text-bold">145</h5>
-                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1"> de aumento</span>
+							<div class="d-flex align-items-center">
+								<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+									<i class="bi bi-cart"></i>
+								</div>
+								<div class="ps-3">
+									<h5 class="text-bold">145</h5>
+									<span class="text-success small pt-1 fw-bold">12%</span>
+									<span class="text-muted small pt-2 ps-1"> de aumento</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Vendas Card -->
 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div><!-- End Vendas Card -->
+				<!-- Recebimentos Card -->
+				<div class="col-xxl-4 col-md-6">
+					<div class="card info-card revenue-card">
+						<div class="card-body">
+							<h5 class="card-title">Recebimentos <span>| mês</span></h5>
 
-        <!-- Recebimentos Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card revenue-card">
-            <div class="card-body">
-              <h5 class="card-title">Recebimentos <span>| mês</span></h5>
+							<div class="d-flex align-items-center">
+								<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+									<i class="bi bi-currency-dollar"></i>
+								</div>
+								<div class="ps-3">
+									<h5 class="text-bold">R$ 3.264,00</h5>
+									<span class="text-success small pt-1 fw-bold">8%</span>
+									<span class="text-muted small pt-2 ps-1">increase</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Recebimentos Card -->
 
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-currency-dollar"></i>
-                </div>
-                <div class="ps-3">
-                  <h5 class="text-bold">R$ 3.264,00</h5>
-                  <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+				<!-- Pessoas Card -->
+				<div class="col-xxl-4 col-xl-12">
+					<div class="card info-card customers-card">
+						<div class="card-body">
+							<h5 class="card-title">Clientes<span></span></h5>
 
-                </div>
-              </div>
-            </div>
+							<div class="d-flex align-items-center">
+								<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+									<i class="bi bi-people"></i>
+								</div>
+								<div class="ps-3">
+									<h5 class="text-bold">100</h5>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Pessoas Card -->
 
-          </div>
-        </div><!-- End Recebimentos Card -->
+				<!-- Reports -->
+				<div class="col-12">
+					<div class="card">
+						<div class="filter">
+							<a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+								<li class="dropdown-header text-start">
+									<h6>Filtros</h6>
+								</li>
 
-        <!-- Pessoas Card -->
-        <div class="col-xxl-4 col-xl-12">
+								<li><a class="dropdown-item" href="#">Today</a></li>
+								<li><a class="dropdown-item" href="#">This Month</a></li>
+								<li><a class="dropdown-item" href="#">This Year</a></li>
+							</ul>
+						</div>
 
-          <div class="card info-card customers-card">
-            <div class="card-body">
-              <h5 class="card-title">Clientes<span></span></h5>
+						<div class="card-body">
+							<h5 class="card-title">Relatórios</h5>
 
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-people"></i>
-                </div>
-                <div class="ps-3">
-                  <h5 class="text-bold">100</h5>
-                </div>
-              </div>
-            </div>
-          </div>
+							<!-- Line Chart -->
+							<div id="reportsChart"></div>
 
-        </div><!-- End Pessoas Card -->
-
-        <!-- Reports -->
-        <div class="col-12">
-          <div class="card">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filtros</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Relatórios</h5>
-
-              <!-- Line Chart -->
-              <div id="reportsChart"></div>
-
-              <!-- <script>
+							<!-- <script>
                 document.addEventListener("DOMContentLoaded", () => {
                   new ApexCharts(document.querySelector("#reportsChart"), {
                     series: [{
@@ -165,86 +154,85 @@
                   }).render();
                 });
               </script> -->
-              <!-- End Line Chart -->
+							<!-- End Line Chart -->
+						</div>
+					</div>
+				</div>
+				<!-- End Reports -->
 
-            </div>
+				<!-- Recent Sales -->
+				<div class="col-12">
+					<div class="card recent-sales overflow-auto">
+						<div class="filter">
+							<a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+								<li class="dropdown-header text-start">
+									<h6>Filtros</h6>
+								</li>
 
-          </div>
-        </div><!-- End Reports -->
+								<li><a class="dropdown-item" href="#">Today</a></li>
+								<li><a class="dropdown-item" href="#">This Month</a></li>
+								<li><a class="dropdown-item" href="#">This Year</a></li>
+							</ul>
+						</div>
 
-        <!-- Recent Sales -->
-        <div class="col-12">
-          <div class="card recent-sales overflow-auto">
+						<div class="card-body">
+							<h5 class="card-title">Contratos Recentes</h5>
 
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filtros</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Contratos Recentes</h5>
-
-              <table class="table table-borderless datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Produto</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="#">#1</a></th>
-                    <td>Cliente 1</td>
-                    <td><a href="#" class="text-primary">PLANO LIGTH</a></td>
-                    <td>R$ 79,90</td>
-                    <td><span class="badge bg-success">Aprovado</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#2</a></th>
-                    <td>Cliente 2</td>
-                    <td><a href="#" class="text-primary">PLANO BÁSICO</a>
-                    </td>
-                    <td>R$ 100,00</td>
-                    <td><span class="badge bg-warning">Pendente</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#2049</a></th>
-                    <td>Cliente 3</td>
-                    <td><a href="#" class="text-primary">PLANO INTERMEDIÁRIO</a></td>
-                    <td>R$ 200,00</td>
-                    <td><span class="badge bg-success">Aprovado</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#5</a></th>
-                    <td>Cliente 5</td>
-                    <td><a href="#" class="text-primar">PLANO AVANÇADO</a></td>
-                    <td>R$ 250,00</td>
-                    <td><span class="badge bg-danger">Rejeitado</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#">#2644</a></th>
-                    <td>Cliente 7</td>
-                    <td><a href="#" class="text-primary">PLANO BASICO</a></td>
-                    <td>R$ 25,00</td>
-                    <td><span class="badge bg-success">Aprovado</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div><!-- End Contratos Recentes -->
-      </div>
-    </div><!-- End Left side columns -->
-  </div>
+							<table class="table table-borderless datatable">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Cliente</th>
+										<th scope="col">Produto</th>
+										<th scope="col">Valor</th>
+										<th scope="col">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row"><a href="#">#1</a></th>
+										<td>Cliente 1</td>
+										<td><a href="#" class="text-primary">PLANO LIGTH</a></td>
+										<td>R$ 79,90</td>
+										<td><span class="badge bg-success">Aprovado</span></td>
+									</tr>
+									<tr>
+										<th scope="row"><a href="#">#2</a></th>
+										<td>Cliente 2</td>
+										<td><a href="#" class="text-primary">PLANO BÁSICO</a></td>
+										<td>R$ 100,00</td>
+										<td><span class="badge bg-warning">Pendente</span></td>
+									</tr>
+									<tr>
+										<th scope="row"><a href="#">#2049</a></th>
+										<td>Cliente 3</td>
+										<td><a href="#" class="text-primary">PLANO INTERMEDIÁRIO</a></td>
+										<td>R$ 200,00</td>
+										<td><span class="badge bg-success">Aprovado</span></td>
+									</tr>
+									<tr>
+										<th scope="row"><a href="#">#5</a></th>
+										<td>Cliente 5</td>
+										<td><a href="#" class="text-primar">PLANO AVANÇADO</a></td>
+										<td>R$ 250,00</td>
+										<td><span class="badge bg-danger">Rejeitado</span></td>
+									</tr>
+									<tr>
+										<th scope="row"><a href="#">#2644</a></th>
+										<td>Cliente 7</td>
+										<td><a href="#" class="text-primary">PLANO BASICO</a></td>
+										<td>R$ 25,00</td>
+										<td><span class="badge bg-success">Aprovado</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- End Contratos Recentes -->
+			</div>
+		</div>
+		<!-- End Left side columns -->
+	</div>
 </section>

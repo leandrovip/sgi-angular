@@ -48,6 +48,13 @@ public class Usuario : EntidadeBase
         Senha = Senha.Decrypt();
     }
 
+    public void PrepararEdicao(Usuario cadastro)
+    {
+        var senhaCadastro = cadastro.Senha.Decrypt();
+        if (Senha == "hack@Vip")
+            Senha = senhaCadastro;
+    }
+
     private void Validar()
     {
         AddNotifications(Email.Notifications);

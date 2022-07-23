@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Return } from 'src/app/interfaces/return.interface';
-import { AccessToken } from 'src/app/models/accessToken.model';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { FormHelper } from 'src/app/helpers/form.helper';
+import { Return } from 'src/app/core/interfaces/return.interface';
+import { Token } from 'src/app/core/models/token.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { PerfilService } from 'src/app/services/pefil.service';
 
 @Component({
 	selector: 'app-login',
@@ -18,7 +18,7 @@ export class UsuarioLoginComponent implements OnInit {
 	public ocupado: boolean = false;
 
 	constructor(
-		private service: UsuarioService,
+		private service: PerfilService,
 		private fb: FormBuilder,
 		private router: Router,
 		private toastr: ToastrService
@@ -58,7 +58,7 @@ export class UsuarioLoginComponent implements OnInit {
 		});
 	}
 
-	login(user: AccessToken | null = null) {
+	login(user: Token | null = null) {
 		if (user) AuthService.setUser(user);
 		this.router.navigate(['/']);
 	}

@@ -1,28 +1,30 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vip.SGI.Api.Controllers.Base;
+using Vip.SGI.Api.Security;
 using Vip.SGI.Application.Adapters;
 using Vip.SGI.Application.Dto;
 using Vip.SGI.Application.Services;
 using Vip.SGI.Application.Wrapper;
-using Vip.SGI.Shared.Constants;
 
 namespace Vip.SGI.Api.Controllers;
 
-[Authorize(Roles = PermissionRole.Administrador)]
-public class UsuarioController : BaseController
+[Authorize]
+public class PerfilController : BaseController
 {
     #region Propriedades
 
     private readonly UsuarioService _service;
+    private readonly ICurrentUser _currentUser;
 
     #endregion
 
     #region Construtores
 
-    public UsuarioController(UsuarioService service)
+    public PerfilController(UsuarioService service, ICurrentUser currentUser)
     {
         _service = service;
+        _currentUser = currentUser;
     }
 
     #endregion
@@ -32,24 +34,9 @@ public class UsuarioController : BaseController
     [HttpGet]
     public async Task<IActionResult> Obter()
     {
-        var usuarios = await _service.Obter();
-        return ActionResult(_service, usuarios.ToDto());
-    }
-
-    [HttpGet("{usuarioId:guid}")]
-    public async Task<ActionResult> ObterPorId(Guid usuarioId)
-    {
-        var usuario = await _service.Obter(usuarioId);
-        return ActionResult(_service, usuario.ToDto());
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Incluir(UsuarioDto dto)
-    {
-        var usuario = dto.ToEntity();
-        if (usuario.Invalid) return BadRequest(ResultFactory.InvalidModel(usuario));
-        await _service.Salvar(usuario, true);
-        return ActionResult(_service, usuario.ToDto());
+        if (_currentUser.IsNotAutenticated()) return BadResult("Usuário não autenticado");
+        var usuario = await _service.Obter(_currentUser.GetUserId());
+        return usuario.IsNull() ? BadResult("Usuário não encontrado") : ActionResult(_service, usuario.ToDto());
     }
 
     [HttpPut]
@@ -62,11 +49,14 @@ public class UsuarioController : BaseController
         return ActionResult(_service, usuario.ToDto());
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Excluir(Guid id)
+    [HttpPost]
+    [Route("autenticar")]
+    [AllowAnonymous]
+    public async Task<IActionResult> Autenticar(UsuarioLoginDto tokenRequest)
     {
-        await _service.Excluir(id);
-        return ActionResult(_service);
+        if (tokenRequest.IsNull()) return BadResult("E-mail ou senha inválidos");
+        var usuario = await _service.Obter(tokenRequest.Email, tokenRequest.Senha);
+        return usuario.IsNull() ? BadResult("E-mail ou senha inválidos") : ActionResult(_service, usuario.ToAccessToken());
     }
 
     #endregion

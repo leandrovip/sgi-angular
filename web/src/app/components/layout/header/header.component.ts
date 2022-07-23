@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AccessToken } from 'src/app/models/accessToken.model';
+import { Token } from 'src/app/core/models/token.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 	private sideStatus!: boolean;
 	public profileImage: string = '';
 	public firstName: string = '';
-	public user: AccessToken | null = null;
+	public user: Token | null = null;
 
 	constructor(private renderer: Renderer2, private router: Router, private toast: ToastrService) {}
 

@@ -1,20 +1,19 @@
 <div class="main-content">
+	<!-- ======= Header ======= -->
+	<app-header></app-header>
 
-  <!-- ======= Header ======= -->
-  <app-header></app-header>
+	<!-- ======= Sidebar ======= -->
+	<app-sidebar></app-sidebar>
 
-  <!-- ======= Sidebar ======= -->
-  <app-sidebar></app-sidebar>
+	<!-- ======= Main ======= -->
+	<div id="main" class="main">
+		<router-outlet></router-outlet>
+	</div>
 
-  <!-- ======= Main ======= -->
-  <div id="main" class="main">
-    <router-outlet></router-outlet>
-  </div>
+	<!-- ======= Footer ======= -->
+	<app-footer></app-footer>
 
-  <!-- ======= Footer ======= -->
-  <app-footer></app-footer>
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-    <i class="bi bi-arrow-up-short"></i>
-  </a>
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+		<i class="bi bi-arrow-up-short"></i>
+	</a>
 </div>
