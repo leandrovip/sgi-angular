@@ -49,7 +49,7 @@ public class UsuarioController : BaseController
         var usuario = dto.ToEntity();
         if (usuario.Invalid) return BadRequest(ResultFactory.InvalidModel(usuario));
         await _service.Salvar(usuario, true);
-        return ActionResult(_service, usuario.ToDto());
+        return ActionResult(_service, usuario.ToDto(), "Usuário salvo com sucesso");
     }
 
     [HttpPut]
@@ -59,14 +59,14 @@ public class UsuarioController : BaseController
         var usuario = dto.ToEntity();
         if (usuario.Invalid) return BadRequest(ResultFactory.InvalidModel(usuario));
         await _service.Salvar(usuario, false);
-        return ActionResult(_service, usuario.ToDto());
+        return ActionResult(_service, usuario.ToDto(), "Usuário salvo com sucesso");
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Excluir(Guid id)
     {
         await _service.Excluir(id);
-        return ActionResult(_service);
+        return ActionResult(_service, message: "Usuário excluído com sucesso");
     }
 
     #endregion

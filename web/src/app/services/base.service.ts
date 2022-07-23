@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
-import { IReturn } from '../core/interfaces/return.interface';
+import { IReturn, Return } from '../core/interfaces/return.interface';
 
 export abstract class BaseService<T> {
 	protected baseApi: string = '';
@@ -12,10 +12,9 @@ export abstract class BaseService<T> {
 		this.baseUrl = `${this.baseApi}/${baseRoute}`;
 	}
 
-	//#region métodos básicos
-
 	obter(id?: string) {
-		const endpoint = id ? `/${id}` : '';
+		const endpoint = id != undefined ? `/${id}` : '';
+		console.log(endpoint);
 		return this.httpClient.get<IReturn<T>>(`${this.baseUrl}${endpoint}`);
 	}
 
@@ -31,5 +30,7 @@ export abstract class BaseService<T> {
 		return this.httpClient.put<IReturn<T>>(this.baseUrl, data);
 	}
 
-	//#endregion
+	excluir(id: string) {
+		return this.httpClient.delete<Return>(`${this.baseUrl}/${id}`);
+	}
 }

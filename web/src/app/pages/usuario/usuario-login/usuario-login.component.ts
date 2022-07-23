@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { FormHelper } from 'src/app/helpers/form.helper';
 import { Return } from 'src/app/core/interfaces/return.interface';
 import { Token } from 'src/app/core/models/token.model';
+import { FormHelper } from 'src/app/helpers/form.helper';
 import { AuthService } from 'src/app/services/auth.service';
 import { PerfilService } from 'src/app/services/pefil.service';
 
@@ -21,7 +21,7 @@ export class UsuarioLoginComponent implements OnInit {
 		private service: PerfilService,
 		private fb: FormBuilder,
 		private router: Router,
-		private toastr: ToastrService
+		private toast: ToastrService
 	) {
 		this.form = this.fb.group({
 			email: ['', Validators.compose([Validators.required, FormHelper.email])],
@@ -42,7 +42,7 @@ export class UsuarioLoginComponent implements OnInit {
 			next: (result) => {
 				if (result && result.success) {
 					this.login(result.data);
-					this.toastr.success(`Olá, ${result.data.nome}`, 'Bem-vindo!');
+					this.toast.success(`Olá, ${result.data.nome}`, 'Bem-vindo!');
 				}
 				this.ocupado = false;
 			},
@@ -51,7 +51,7 @@ export class UsuarioLoginComponent implements OnInit {
 					? (err.error as Return).message
 					: 'Não foi possível efetuar o login';
 
-				this.toastr.error(message, 'Que pena!');
+				this.toast.error(message, 'Que pena!');
 				this.form.get('senha')?.reset();
 				this.ocupado = false;
 			},

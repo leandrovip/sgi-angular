@@ -63,14 +63,16 @@ public abstract class BaseService : Notifiable
         }
     }
 
-    protected async Task Excluir<T>(Guid id) where T : EntidadeBase
+    protected async Task Excluir<T>(Guid id, string mensagemErro= "") where T : EntidadeBase
     {
         try
         {
+            if (mensagemErro.IsNullOrEmpty()) mensagemErro = "Registro não encontrado";
+
             var entidade = await _db.Set<T>().FindAsync(id);
             if (entidade.IsNull())
             {
-                AddNotification("BaseService.Excluir", "Registro não encontrado");
+                AddNotification("BaseService.Excluir", mensagemErro);
                 return;
             }
 

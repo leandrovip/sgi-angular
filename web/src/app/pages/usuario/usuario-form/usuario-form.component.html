@@ -18,7 +18,8 @@
 									type="text"
 									class="form-control"
 									formControlName="nome"
-									[ngClass]="formHelper.validate('nome')" />
+									[ngClass]="formHelper.validate('nome')"
+									#txtNome />
 								<label for="email">Nome</label>
 							</div>
 						</div>
@@ -65,11 +66,12 @@
 						</div>
 						<!-- Ends Senha -->
 
-						<div class="text-end">
-							<button type="submit" class="btn btn-success" [disabled]="form.invalid">
+						<div class="d-inline-flex justify-content-end gap-3">
+							<button type="submit" class="btn btn-success pr-5" [disabled]="form.invalid">
 								<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ocupado"></span>
 								Salvar
 							</button>
+							<button class="btn btn-secondary" [routerLink]="['..']">Voltar</button>
 						</div>
 					</form>
 				</div>

@@ -15,9 +15,9 @@ public abstract class BaseController : ControllerBase
         return StatusCode(500, ResultFactory.ApplicationError(message));
     }
 
-    protected ObjectResult ActionResult(Notifiable model, object data = null)
+    protected ObjectResult ActionResult(Notifiable model, object data = null, string message = "")
     {
-        return model.Valid ? Ok(ResultFactory.Success(data)) : BadRequest(ResultFactory.BadRequest(model.Notifications));
+        return model.Valid ? Ok(ResultFactory.Success(message, data)) : BadRequest(ResultFactory.BadRequest(model.Notifications));
     }
 
     protected ObjectResult ActionResultPaged(Notifiable model, object data)

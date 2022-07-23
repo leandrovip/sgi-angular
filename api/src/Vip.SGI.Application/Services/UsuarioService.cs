@@ -32,7 +32,7 @@ public class UsuarioService : BaseService
 
     public async Task Excluir(Guid usuarioId)
     {
-        await Excluir<Usuario>(usuarioId);
+        await Excluir<Usuario>(usuarioId, "Usuário não encontrado");
     }
 
     public async Task<Usuario> Obter(Guid usuarioId)

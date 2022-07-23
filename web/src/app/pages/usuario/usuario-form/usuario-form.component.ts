@@ -1,12 +1,11 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Guid } from 'guid-typescript';
-import { ToastrService } from 'ngx-toastr';
-import { Return } from 'src/app/core/interfaces/return.interface';
+import { IReturn } from 'src/app/core/interfaces/return.interface';
 import { Usuario } from 'src/app/core/models/usuario.model';
 import { FormHelper } from 'src/app/helpers/form.helper';
+import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { PerfilService } from 'src/app/services/pefil.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -21,13 +20,14 @@ export class UsuarioFormComponent implements OnInit {
 	public urlName: string = '';
 	public ocupado: boolean = false;
 
+	@ViewChild('txtNome') txtNome: ElementRef;
+
 	constructor(
 		private fb: FormBuilder,
 		private perfilService: PerfilService,
 		private usuarioService: UsuarioService,
-		private location: Location,
-		private router: Router,
-		private toast: ToastrService
+		private route: ActivatedRoute,
+		private alert: AlertService
 	) {
 		this.form = this.fb.group({
 			usuarioId: [''],
@@ -40,10 +40,9 @@ export class UsuarioFormComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		const endpoint = this.router.routerState.snapshot.url.split('/');
-		const index = endpoint.length > 2 ? 2 : 1;
+		const endpoint = this.alert.getUrl().split('/');
+		const index = endpoint.length > 3 ? 2 : 1;
 		this.urlName = endpoint[endpoint.length - index];
-
 		this.obterUsuario();
 	}
 
@@ -56,46 +55,52 @@ export class UsuarioFormComponent implements OnInit {
 					if (result && result.success) {
 						this.ocupado = false;
 						AuthService.setName(result.data.nome);
-						this.toast.success('Perfil salvo com sucesso!');
-						this.router.navigate(['']);
+						this.alert.success({ message: 'Perfil salvo com sucesso', urlNavigate: [''] });
 					}
 				},
-				error: (err) => {
+				error: (result) => {
 					this.ocupado = false;
-					this.toast.error(err.message, 'Que pena!');
-					this.router.navigate(['']);
+					this.alert.error({ err: result.error, urlNavigate: [''] });
 				},
 			});
 		} else if (this.urlName == 'incluir') {
 			const usuarioId = this.form.get('usuarioId');
-			if (!usuarioId?.value) {
-				usuarioId?.setValue(Guid.create().toString());
-			}
+			usuarioId?.setValue(Guid.create().toString());
 
 			this.usuarioService.incluir(this.form.value).subscribe({
 				next: (result) => {
 					if (result && result.success) {
 						this.ocupado = false;
-						this.toast.success('Usuário salvo com sucesso!');
-						this.location.back();
+						this.alert.success({ result: result, pageBack: true });
 					}
 				},
-				error: (err) => {
+				error: (result) => {
 					this.ocupado = false;
-					console.log(err);
-					this.toast.error(err.error.events[0], 'Que pena!');
+					this.alert.error({ err: result.error });
+				},
+			});
+		} else if (this.urlName == 'editar') {
+			this.usuarioService.editar(this.form.value).subscribe({
+				next: (result) => {
+					if (result && result.success) {
+						this.ocupado = false;
+						this.alert.success({ result: result, pageBack: true });
+					}
+				},
+				error: (result) => {
+					this.ocupado = false;
+					this.alert.error({ err: result.error });
 				},
 			});
 		}
 	}
 
-	obterUsuario(): void {
+	private obterUsuario(): void {
 		this.ocupado = true;
 
 		if (this.urlName == 'perfil') {
 			if (!AuthService.isAuthenticate()) {
-				this.toast.warning('Ação não permitida', 'Ops');
-				this.router.navigate(['/login']);
+				this.alert.warning({ message: 'Ação não permitida', urlNavigate: ['/login'] });
 				return;
 			}
 
@@ -105,31 +110,51 @@ export class UsuarioFormComponent implements OnInit {
 
 			this.perfilService.obter().subscribe({
 				next: (result) => {
-					if (result && result.success) {
-						this.preencherForm(result.data);
-					}
-
+					this.preencherCampos(result);
 					this.ocupado = false;
 				},
-				error: (err) => {
-					const message = (err.error as Return).message
-						? (err.error as Return).message
-						: 'Não foi possível obter o usuário';
-
-					this.toast.error(message, 'Que pena!');
-					this.router.navigate(['']);
+				error: (result) => {
+					this.alert.error({ err: result.error, urlNavigate: [''] });
 					this.ocupado = false;
 				},
 			});
+		} else if (this.urlName == 'editar') {
+			const usuarioId = this.route.snapshot.params['id'];
+			if (!usuarioId) {
+				this.alert.warning({ message: 'Usuário não encontrado', pageBack: true });
+				return;
+			}
+
+			this.form.get('senha')?.clearValidators();
+
+			this.usuarioService.obter(usuarioId).subscribe({
+				next: (result) => {
+					this.preencherCampos(result);
+					this.ocupado = false;
+				},
+				error: (result) => {
+					this.alert.error({ err: result.error, pageBack: true });
+					this.ocupado = false;
+				},
+			});
+		} else if (this.urlName == 'incluir') {
+			this.ocupado = false;
 		}
 	}
 
-	preencherForm(usuario: Usuario) {
+	private preencherCampos(result: IReturn<Usuario>) {
+		if (!result || !result.success) {
+			return;
+		}
+
+		const usuario = result.data;
 		this.form.patchValue({
 			usuarioId: usuario.usuarioId,
 			nome: usuario.nome,
 			email: usuario.email,
 			usuarioFuncao: usuario.usuarioFuncao,
 		});
+
+		this.txtNome.nativeElement.focus();
 	}
 }

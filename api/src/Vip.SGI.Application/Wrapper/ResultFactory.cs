@@ -7,22 +7,23 @@ public static class ResultFactory
 {
     public static Result Success(object data)
     {
-        return Result.Factory(true, "Requisição efetuada com sucesso!", data: data);
+        return Result.Factory(true, "Requisição efetuada com sucesso", data: data);
     }
 
     public static Result Success(string message, object data)
     {
+        if (message.IsNullOrEmpty()) message = "Requisição efetuada com sucesso";
         return Result.Factory(true, message, data: data);
     }
 
     public static Result BadRequest()
     {
-        return Result.Factory(false, "Ops, algo não deu certo");
+        return Result.Factory(false, "Erro de requisição");
     }
 
     public static Result BadRequest(Exception exception)
     {
-        return Result.Factory(false, "Ops, algo não deu certo", exception.ToEvents());
+        return Result.Factory(false, "Ops :(", exception.ToEvents());
     }
 
     public static Result BadRequest(string message)
@@ -37,7 +38,7 @@ public static class ResultFactory
 
     public static Result BadRequest(IEnumerable<Notification> notifications)
     {
-        return Result.Factory(false, "Ops, algo não deu certo", notifications.ToEvents(true));
+        return Result.Factory(false, "Ops :(", notifications.ToEvents(true));
     }
 
     public static Result ApplicationError(string message)
